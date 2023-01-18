@@ -1,0 +1,489 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v0
+  name: wrk-0
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v0
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node2
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v1
+  name: wrk-1
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v1
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node6
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v2
+  name: wrk-2
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v2
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node7
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v3
+  name: wrk-3
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v3
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node7
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v4
+  name: wrk-4
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v4
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v4
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node4
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+    more-replicas: v5
+  name: wrk-5
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+      more-replicas: v5
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+        more-replicas: v5
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        imagePullPolicy: IfNotPresent
+        name: wrk
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node4
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v0
+  name: nginx-0
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v0
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node2
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v1
+  name: nginx-1
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v1
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node2
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v2
+  name: nginx-2
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v2
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node7
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v3
+  name: nginx-3
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v3
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node7
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v4
+  name: nginx-4
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v4
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v4
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node7
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v5
+  name: nginx-5
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v5
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v5
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node4
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v6
+  name: nginx-6
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v6
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v6
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node4
+      restartPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+    more-replicas: v7
+  name: nginx-7
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+      more-replicas: v7
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+        more-replicas: v7
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      nodeName: skv-node4
+      restartPolicy: Always

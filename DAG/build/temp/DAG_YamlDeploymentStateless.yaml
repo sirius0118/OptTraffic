@@ -1,0 +1,2447 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-a
+    more-replicas: v0
+  name: app-a-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-a
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-a
+        more-replicas: v0
+      name: app-a
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-a
+    more-replicas: v1
+  name: app-a-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-a
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-a
+        more-replicas: v1
+      name: app-a
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-a
+    more-replicas: v2
+  name: app-a-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-a
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-a
+        more-replicas: v2
+      name: app-a
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-a
+    more-replicas: v3
+  name: app-a-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-a
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-a
+        more-replicas: v3
+      name: app-a
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-b
+    more-replicas: v0
+  name: app-b-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-b
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-b
+        more-replicas: v0
+      name: app-b
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-b.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-b
+    more-replicas: v1
+  name: app-b-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-b
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-b
+        more-replicas: v1
+      name: app-b
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node6
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-b.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-b
+    more-replicas: v2
+  name: app-b-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-b
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-b
+        more-replicas: v2
+      name: app-b
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-b.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-b
+    more-replicas: v3
+  name: app-b-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-b
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-b
+        more-replicas: v3
+      name: app-b
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-b.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-c
+    more-replicas: v0
+  name: app-c-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-c
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-c
+        more-replicas: v0
+      name: app-c
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node6
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-c.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-c
+    more-replicas: v1
+  name: app-c-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-c
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-c
+        more-replicas: v1
+      name: app-c
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-c.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-c
+    more-replicas: v2
+  name: app-c-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-c
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-c
+        more-replicas: v2
+      name: app-c
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-c.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-c
+    more-replicas: v3
+  name: app-c-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-c
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-c
+        more-replicas: v3
+      name: app-c
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-c.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-d
+    more-replicas: v0
+  name: app-d-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-d
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-d
+        more-replicas: v0
+      name: app-d
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-d
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node6
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-d.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-d
+    more-replicas: v1
+  name: app-d-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-d
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-d
+        more-replicas: v1
+      name: app-d
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-d
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node2
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-d.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-d
+    more-replicas: v2
+  name: app-d-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-d
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-d
+        more-replicas: v2
+      name: app-d
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-d
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-d.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-d
+    more-replicas: v3
+  name: app-d-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-d
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-d
+        more-replicas: v3
+      name: app-d
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-d
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-d.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-e
+    more-replicas: v0
+  name: app-e-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-e
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-e
+        more-replicas: v0
+      name: app-e
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-e
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-e.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-e
+    more-replicas: v1
+  name: app-e-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-e
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-e
+        more-replicas: v1
+      name: app-e
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-e
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-e.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-e
+    more-replicas: v2
+  name: app-e-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-e
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-e
+        more-replicas: v2
+      name: app-e
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-e
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-e.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-e
+    more-replicas: v3
+  name: app-e-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-e
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-e
+        more-replicas: v3
+      name: app-e
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-e
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node2
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-e.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-f
+    more-replicas: v0
+  name: app-f-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-f
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-f
+        more-replicas: v0
+      name: app-f
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-f
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node2
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-f.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-f
+    more-replicas: v1
+  name: app-f-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-f
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-f
+        more-replicas: v1
+      name: app-f
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-f
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-f.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-f
+    more-replicas: v2
+  name: app-f-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-f
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-f
+        more-replicas: v2
+      name: app-f
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-f
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-f.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-f
+    more-replicas: v3
+  name: app-f-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-f
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-f
+        more-replicas: v3
+      name: app-f
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-f
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-f.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-g
+    more-replicas: v0
+  name: app-g-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-g
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-g
+        more-replicas: v0
+      name: app-g
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-g
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-g.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-g
+    more-replicas: v1
+  name: app-g-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-g
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-g
+        more-replicas: v1
+      name: app-g
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-g
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-g.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-g
+    more-replicas: v2
+  name: app-g-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-g
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-g
+        more-replicas: v2
+      name: app-g
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-g
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node6
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-g.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-g
+    more-replicas: v3
+  name: app-g-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-g
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-g
+        more-replicas: v3
+      name: app-g
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-g
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-g.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-h
+    more-replicas: v0
+  name: app-h-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-h
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-h
+        more-replicas: v0
+      name: app-h
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-h
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-h.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-h
+    more-replicas: v1
+  name: app-h-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-h
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-h
+        more-replicas: v1
+      name: app-h
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-h
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-h.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-h
+    more-replicas: v2
+  name: app-h-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-h
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-h
+        more-replicas: v2
+      name: app-h
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-h
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-h.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-h
+    more-replicas: v3
+  name: app-h-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-h
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-h
+        more-replicas: v3
+      name: app-h
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-h
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-h.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-i
+    more-replicas: v0
+  name: app-i-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-i
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-i
+        more-replicas: v0
+      name: app-i
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-i
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-i.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-i
+    more-replicas: v1
+  name: app-i-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-i
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-i
+        more-replicas: v1
+      name: app-i
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-i
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-i.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-i
+    more-replicas: v2
+  name: app-i-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-i
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-i
+        more-replicas: v2
+      name: app-i
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-i
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-i.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-i
+    more-replicas: v3
+  name: app-i-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-i
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-i
+        more-replicas: v3
+      name: app-i
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-i
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-i.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-j
+    more-replicas: v0
+  name: app-j-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-j
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-j
+        more-replicas: v0
+      name: app-j
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-j
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-j.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-j
+    more-replicas: v1
+  name: app-j-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-j
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-j
+        more-replicas: v1
+      name: app-j
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-j
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-j.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-j
+    more-replicas: v2
+  name: app-j-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-j
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-j
+        more-replicas: v2
+      name: app-j
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-j
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-j.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-j
+    more-replicas: v3
+  name: app-j-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-j
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-j
+        more-replicas: v3
+      name: app-j
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-j
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node7
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-j.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-l
+    more-replicas: v0
+  name: app-l-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-l
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-l
+        more-replicas: v0
+      name: app-l
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-l
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node6
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-l.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-l
+    more-replicas: v1
+  name: app-l-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-l
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-l
+        more-replicas: v1
+      name: app-l
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-l
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-l.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-l
+    more-replicas: v2
+  name: app-l-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-l
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-l
+        more-replicas: v2
+      name: app-l
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-l
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-l.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-l
+    more-replicas: v3
+  name: app-l-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-l
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-l
+        more-replicas: v3
+      name: app-l
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-l
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node3
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-l.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-k
+    more-replicas: v0
+  name: app-k-0
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-k
+      more-replicas: v0
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-k
+        more-replicas: v0
+      name: app-k
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-k
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node2
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-k.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-k
+    more-replicas: v1
+  name: app-k-1
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-k
+      more-replicas: v1
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-k
+        more-replicas: v1
+      name: app-k
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-k
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node2
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-k.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-k
+    more-replicas: v2
+  name: app-k-2
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-k
+      more-replicas: v2
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-k
+        more-replicas: v2
+      name: app-k
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-k
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-k.lua
+          type: File
+        name: lua-file
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    MSname: DAG
+    app-name: app-k
+    more-replicas: v3
+  name: app-k-3
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      MSname: DAG
+      app-name: app-k
+      more-replicas: v3
+  template:
+    metadata:
+      labels:
+        MSname: DAG
+        app-name: app-k
+        more-replicas: v3
+      name: app-k
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-k
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      nodeName: skv-node4
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-k.lua
+          type: File
+        name: lua-file

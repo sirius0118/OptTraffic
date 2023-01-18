@@ -1,0 +1,683 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-a
+  name: app-a
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-a
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-a
+  name: app-a
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-a
+  template:
+    metadata:
+      labels:
+        app-name: app-a
+      name: app-a
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-b
+  name: app-b
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-b
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-b
+  name: app-b
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-b
+  template:
+    metadata:
+      labels:
+        app-name: app-b
+      name: app-b
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-b.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-c
+  name: app-c
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-c
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-c
+  name: app-c
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-c
+  template:
+    metadata:
+      labels:
+        app-name: app-c
+      name: app-c
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-c.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-d
+  name: app-d
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-d
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-d
+  name: app-d
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-d
+  template:
+    metadata:
+      labels:
+        app-name: app-d
+      name: app-d
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-d
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-d.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-e
+  name: app-e
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-e
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-e
+  name: app-e
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-e
+  template:
+    metadata:
+      labels:
+        app-name: app-e
+      name: app-e
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-e
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-e.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-f
+  name: app-f
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-f
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-f
+  name: app-f
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-f
+  template:
+    metadata:
+      labels:
+        app-name: app-f
+      name: app-f
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-f
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-f.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-g
+  name: app-g
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-g
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-g
+  name: app-g
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-g
+  template:
+    metadata:
+      labels:
+        app-name: app-g
+      name: app-g
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-g
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-g.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-h
+  name: app-h
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-h
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-h
+  name: app-h
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-h
+  template:
+    metadata:
+      labels:
+        app-name: app-h
+      name: app-h
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-h
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-h.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-i
+  name: app-i
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-i
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-i
+  name: app-i
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-i
+  template:
+    metadata:
+      labels:
+        app-name: app-i
+      name: app-i
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-i
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-i.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-j
+  name: app-j
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-j
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-j
+  name: app-j
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-j
+  template:
+    metadata:
+      labels:
+        app-name: app-j
+      name: app-j
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-j
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-j.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-l
+  name: app-l
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-l
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-l
+  name: app-l
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-l
+  template:
+    metadata:
+      labels:
+        app-name: app-l
+      name: app-l
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-l
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-l.lua
+          type: File
+        name: lua-file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-k
+  name: app-k
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-k
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-k
+  name: app-k
+  namespace: zxz-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app-name: app-k
+  template:
+    metadata:
+      labels:
+        app-name: app-k
+      name: app-k
+    spec:
+      containers:
+      - args:
+        - -c
+        - /usr/local/openresty/nginx/sbin/nginx; sleep 999999;
+        command:
+        - /bin/bash
+        image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-k
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      restartPolicy: Always
+      volumes:
+      - hostPath:
+          path: /tmp/app-k.lua
+          type: File
+        name: lua-file
