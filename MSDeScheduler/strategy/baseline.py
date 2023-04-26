@@ -1,0 +1,310 @@
+import os
+import random
+from time import time
+from unittest import result
+import requests
+from typing import Dict, List, Tuple
+from MSDeScheduler.operation.HotExchange import operate
+from MSDeScheduler.metrics.TrafficGraph import Vertices, Graph, GraphSet, Edge
+from MSDeScheduler.metrics.ClusterStatus import NodeStatus, NodeStatusSet
+
+
+def get_node_cpu_spend(node):
+    result = []
+    for node_i in node:
+        data = ''.join(os.popen(f"kubectl describe node {node_i} | grep cpu | grep %"))
+        per = data[data.index('(')+1:data.index('%')]
+        result.append(int(per))
+    return result[0], result[1]
+
+
+class LocalizeHeavyTraffic:
+    """
+    SOTA 方法实现：寻找最大流量的跨节点链路， 
+    """
+
+    def __init__(self, graphSet: GraphSet, nodeSet: NodeStatusSet):
+        self.graphSet = graphSet
+        self.nodeSet = nodeSet
+        self.result: List[Edge] = []
+        self.translated = []
+        self.translatedMap = {}
+         
+Threshold 
+        self.Threshold = 10000
+
+    def choiceEdge(self):
+         
+。
+        flag = 0
+        trafficEdge: Dict[float, Tuple[Graph, Edge]] = {}
+        for graph in self.graphSet.GraphSet.keys():
+            for edge in self.graphSet.GraphSet[graph].EdgeSet.keys():
+                traffic = self.graphSet.GraphSet[graph].EdgeSet[edge].Send \
+                          + self.graphSet.GraphSet[graph].EdgeSet[edge].Receive
+                trafficEdge[traffic + random.random()] = (self.graphSet.GraphSet[graph],
+                                                          self.graphSet.GraphSet[graph].EdgeSet[edge])
+            trafficEdge_key = list(trafficEdge.keys())
+            trafficEdge_key.sort(reverse=True)
+            # print(trafficEdge_key)
+            # result = []
+            for i in trafficEdge_key:
+                 
+
+                # if trafficEdge[i][1].UM.NodeName != trafficEdge[i][1].DM.NodeName:
+                 
+Threshold
+                if i > self.Threshold:
+                    self.result.append(trafficEdge[i][1])
+                    flag = 1
+        if flag:
+            return True
+        else:
+            return False
+
+    '''
+    def choiceEdge(self):
+        result = ['nginx-thrift~home-timeline-service', 'home-timeline-service~post-storage-service']
+        
+    '''
+
+
+    def Localize(self):
+        self.translated = []
+         
+，返回False
+        print('这是Localization')
+        if not self.choiceEdge():
+            return False
+        for i in self.result:
+            print(i.UM.MSName + ': ' + i.Name)
+
+        def trans_able(link: Edge, type: int) -> bool:
+            if link.DM.NodeName == link.UM.NodeName:
+                self.translated.append(link.UM.MSName + '~' + link.UM.Name)
+                self.translated.append(link.DM.MSName + '~' + link.DM.Name)
+                return False
+
+            deploy_UM, deploy_DM = '', ''
+            flag = 0
+            for i in range(1, len(link.UM.Name)):
+                if link.UM.Name[-i] == '-':
+                    flag += 1
+                    if flag == 2:
+                        deploy_UM = link.UM.Name[:-i]
+                        break
+            flag = 0
+            for i in range(1, len(link.DM.Name)):
+                if link.DM.Name[-i] == '-':
+                    flag += 1
+                    if flag == 2:
+                        deploy_DM = link.DM.Name[:-i]
+                        break
+
+            if type == 0:
+                if link.UM.MSName + '~' + deploy_UM in self.translated:
+                    return False
+                else:
+                    self.translated.append(link.UM.MSName + '~' + deploy_UM)
+                    return True
+            elif type == 1:
+                if link.DM.MSName + '~' + deploy_DM in self.translated:
+                    return False
+                else:
+                    self.translated.append(link.DM.MSName + '~' + deploy_DM)
+                    return True
+
+        # for graph in self.targetGraphEdge.keys():
+        # hotExchange = operate(self.graphSet,, self.nodeSet)
+        for i in self.result:
+            print('now is', i.Name)
+            hotExchange = operate(self.graphSet, self.graphSet.GraphSet[i.UM.MSName], self.nodeSet)
+            if i.DM.Stateful:
+                print(i.UM.Name, i.DM.NodeName)
+                if trans_able(i, 0):
+                    hotExchange.HotTrans(i.UM, i.DM.NodeName)
+            elif i.UM.Stateful:
+                print(i.DM.Name, i.UM.NodeName)
+                if trans_able(i, 1):
+                    hotExchange.HotTrans(i.DM, i.UM.NodeName)
+            else:
+                if trans_able(i, 0):
+                    print(i.UM.Name, i.DM.NodeName)
+                    hotExchange.HotTrans(i.UM, i.DM.NodeName)
+                elif trans_able(i, 1):
+                    print(i.DM.Name, i.UM.NodeName)
+                    # if trans_able(i, 1):
+                    hotExchange.HotTrans(i.DM, i.UM.NodeName)
+         
+
+        return True
+
+    def OptimumLocalize(self):
+         
+，返回False
+        if not self.choiceEdge():
+            return False
+        # self.result = ['social-network~nginx-thrift~home-timeline-service',
+        #           'social-network~home-timeline-service~post-storage-service']
+        for i in self.result:
+            print(i.UM.MSName + ': ' + i.Name)
+
+        def trans_able(link: Edge):
+            print('现在是判断:', link.Name)
+            hotExchange = operate(self.graphSet, self.graphSet.GraphSet[link.UM.MSName], self.nodeSet)
+             
+service
+            if link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName not in self.translatedMap.keys():
+                 
+
+                if link.DM.NodeName == link.UM.NodeName:
+                    print('一样', link.DM.NodeName)
+                    self.translatedMap[link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] \
+                        = link.DM.NodeName
+                    self.translated.append(link.UM.MSName + '~' + link.UM.ServiceName)
+                    self.translated.append(link.DM.MSName + '~' + link.DM.ServiceName)
+                    # return 0
+                 
+
+                else:
+                     
+.
+                     
+UM已经出现or stateful
+                    if (link.UM.MSName + '~' + link.UM.ServiceName in self.translated or link.UM.Stateful) \
+                            and not (link.DM.MSName + '~' + link.DM.ServiceName in self.translated or link.DM.Stateful):
+                        self.translatedMap[link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] \
+                            = link.UM.NodeName
+                        self.translated.append(link.DM.MSName + '~' + link.DM.ServiceName)
+                        hotExchange.HotTrans(link.DM, link.UM.NodeName)
+
+                     
+DM已经出现or stateful
+                    elif not (link.UM.MSName + '~' + link.UM.ServiceName in self.translated or link.UM.Stateful) \
+                            and (link.DM.MSName + '~' + link.DM.ServiceName in self.translated or link.DM.Stateful):
+                        self.translatedMap[link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] \
+                            = link.DM.NodeName
+                        self.translated.append(link.UM.MSName + '~' + link.UM.ServiceName)
+                        hotExchange.HotTrans(link.UM, link.DM.NodeName)
+                     
+and not stateful
+                    elif not (link.UM.MSName + '~' + link.UM.ServiceName in self.translated or link.UM.Stateful) \
+                            and not (link.DM.MSName + '~' + link.DM.ServiceName in self.translated or link.DM.Stateful):
+                        self.translatedMap[link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] \
+                            = link.DM.NodeName
+                        self.translated.append(link.UM.MSName + '~' + link.UM.ServiceName)
+                        self.translated.append(link.UM.MSName + '~' + link.DM.ServiceName)
+                        hotExchange.HotTrans(link.UM, link.DM.NodeName)
+
+
+             
+service
+            if link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName in self.translatedMap.keys():
+                print(link.UM.NodeName, self.translatedMap[
+                    link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName])
+                 
+UM
+                if link.UM.NodeName == self.translatedMap[
+                    link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] and\
+                        link.DM.NodeName == self.translatedMap[
+                    link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName]:
+                    pass
+                    # return 0
+                elif link.DM.NodeName == self.translatedMap[
+                    link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] and not link.UM.Stateful:
+                    hotExchange.HotTrans(link.UM, link.DM.NodeName)
+                    # return 1
+                elif link.UM.NodeName == self.translatedMap[
+                    link.UM.MSName + '~' + link.UM.ServiceName + '~' + link.DM.ServiceName] and not link.DM.Stateful:
+                    hotExchange.HotTrans(link.DM, link.UM.NodeName)
+                elif not link.UM.Stateful and not link.DM.Stateful:
+                    hotExchange.HotTrans(link.UM, link.DM.NodeName)
+                    hotExchange.HotTrans(link.DM, link.UM.NodeName)
+
+        for i in self.result:
+            trans_able(i)
+         
+
+        return True
+
+    def RestrictLocalize(self) -> bool:
+        # TODO： 
+        """
+        此函数为带有限制条件的本地化函数。 
+        移动一个Pod之前会进行判断：如果目标机器内已经倍申请的资源超过了80%， 
+        :return:  
+        """
+        if not self.choiceEdge():
+            return False
+        for i in self.result:
+            print(i.UM.MSName + ': ' + i.Name)
+
+        def trans_able(link: Edge, type: int) -> bool:
+            if link.DM.NodeName == link.UM.NodeName:
+                self.translated.append(link.UM.MSName + '~' + link.UM.Name)
+                self.translated.append(link.DM.MSName + '~' + link.DM.Name)
+                return False
+
+            deploy_UM, deploy_DM = '', ''
+            flag = 0
+            for i in range(1, len(link.UM.Name)):
+                if link.UM.Name[-i] == '-':
+                    flag += 1
+                    if flag == 2:
+                        deploy_UM = link.UM.Name[:-i]
+                        break
+            flag = 0
+            for i in range(1, len(link.DM.Name)):
+                if link.DM.Name[-i] == '-':
+                    flag += 1
+                    if flag == 2:
+                        deploy_DM = link.DM.Name[:-i]
+                        break
+
+            if type == 0:
+                if link.UM.MSName + '~' + deploy_UM in self.translated:
+                    return False
+                else:
+                    self.translated.append(link.UM.MSName + '~' + deploy_UM)
+                    return True
+            elif type == 1:
+                if link.DM.MSName + '~' + deploy_DM in self.translated:
+                    return False
+                else:
+                    self.translated.append(link.DM.MSName + '~' + deploy_DM)
+                    return True
+
+        with open('/home/k8s/exper/zxz/MSScheduler_python/MSDeScheduler/strategy/percent.txt', 'r') as f:
+            percent = int(f.read())
+        # percent = 85
+
+        for i in self.result:
+            hotExchange = operate(self.graphSet, self.graphSet.GraphSet[i.UM.MSName], self.nodeSet)
+            # time.sleep(0.5)
+            um_node, dm_node = get_node_cpu_spend([i.UM.NodeName, i.DM.NodeName])
+            # print('信息：',um_node, dm_node)
+            if um_node < percent and dm_node < percent:
+                if i.DM.Stateful:
+                    print(i.UM.Name, i.DM.NodeName)
+                    if trans_able(i, 0):
+                        hotExchange.HotTrans(i.UM, i.DM.NodeName)
+                elif i.UM.Stateful:
+                    print(i.DM.Name, i.UM.NodeName)
+                    if trans_able(i, 1):
+                        hotExchange.HotTrans(i.DM, i.UM.NodeName)
+                else:
+                    if trans_able(i, 0):
+                        hotExchange.HotTrans(i.UM, i.DM.NodeName)
+                    elif trans_able(i, 1):
+                        hotExchange.HotTrans(i.DM, i.UM.NodeName)
+            elif um_node < percent:
+                if not i.DM.Stateful:
+                    if trans_able(i, 1):
+                        hotExchange.HotTrans(i.DM, i.UM.NodeName)
+            elif dm_node < percent:
+                if not i.UM.Stateful:
+                    if trans_able(i, 0):
+                        hotExchange.HotTrans(i.UM, i.DM.NodeName)
+         
+
+        return True

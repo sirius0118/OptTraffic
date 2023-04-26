@@ -1,0 +1,155 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-a
+  name: app-a
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-a
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-b
+  name: app-b
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-b
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-c
+  name: app-c
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-c
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-d
+  name: app-d
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-d
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-e
+  name: app-e
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-e
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-f
+  name: app-f
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-f
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-g
+  name: app-g
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-g
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-h
+  name: app-h
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-h
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-i
+  name: app-i
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-i
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-j
+  name: app-j
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-j
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-l
+  name: app-l
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-l
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-k
+  name: app-k
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-k

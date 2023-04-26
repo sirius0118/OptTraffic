@@ -1,0 +1,11 @@
+{"zxz-test":{
+    "app-a": "app-b",
+    "app-b": ["app-c", "app-d"],
+    "app-c": ["app-e", "app-f"],
+    "app-d": "app-g",
+    "app-f": "app-h",
+    "app-g": "app-i",
+    "app-h": "app-j",
+    "app-i": "app-k",
+    "app-j": "app-l"
+}}

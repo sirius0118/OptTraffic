@@ -1,0 +1,76 @@
+ 
+Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: wrk
+  name: wrk
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: wrk
+  template:
+    metadata:
+      labels:
+        app-name: wrk
+      name: wrk
+    spec:
+      containers:
+      - image: qi0523/wrk:latest
+        name: wrk
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 2Gi
+          requests:
+            cpu: 2000m
+            memory: 2Gi
+      restartPolicy: Always
+---
+ 
+service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: nginx
+  name: nginx
+  namespace: wrk-nginx
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: nginx
+  name: nginx
+  namespace: wrk-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: nginx
+  template:
+    metadata:
+      labels:
+        app-name: nginx
+      name: nginx
+    spec:
+      containers:
+      - image: qi0523/nginx:latest
+        name: nginx
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      restartPolicy: Always

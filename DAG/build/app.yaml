@@ -1,0 +1,54 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: app-a
+  name: service-a
+  namespace: zxz-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-a
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-a
+  name: app-a
+  namespace: zxz-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: app-a
+  template:
+    metadata:
+      labels:
+        app-name: app-a
+      name: app-a
+    spec:
+      containers:
+      - image: redirect:v2.0
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        command: ["/bin/bash"]
+        args: ["-c", "/usr/local/openresty/nginx/sbin/nginx; sleep 999999;"]
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /lua/test.lua
+          name: lua-file
+      volumes:
+      - hostPath:
+          path: /tmp/app-a.lua
+          type: File
+        name: lua-file
+      restartPolicy: Always

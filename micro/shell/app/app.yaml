@@ -1,0 +1,125 @@
+ 
+Deployment_A
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-a
+  name: app-a
+  namespace: nginx-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: app-a
+  template:
+    metadata:
+      labels:
+        app-name: app-a
+      name: app-a
+    spec:
+      containers:
+      - image: qi0523/app:latest
+        imagePullPolicy: IfNotPresent
+        name: app-a
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      restartPolicy: Always
+---
+ 
+service_B
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: service-b
+  name: service-b
+  namespace: nginx-app
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-b
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-b
+  name: app-b
+  namespace: nginx-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: app-b
+  template:
+    metadata:
+      labels:
+        app-name: app-b
+      name: app-b
+    spec:
+      containers:
+      - image: qi0523/app:latest
+        imagePullPolicy: IfNotPresent
+        name: app-b
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      restartPolicy: Always
+
+---
+ 
+serviceC
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app-name: service-c
+  name: service-c
+  namespace: nginx-app
+spec:
+  ports:
+  - port: 80
+  selector:
+    app-name: app-c
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: app-c
+  name: app-c
+  namespace: nginx-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app-name: app-c
+  template:
+    metadata:
+      labels:
+        app-name: app-c
+      name: app-c
+    spec:
+      containers:
+      - image: qi0523/app:latest
+        imagePullPolicy: IfNotPresent
+        name: app-c
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+          requests:
+            cpu: 1000m
+            memory: 1Gi
+      restartPolicy: Always
